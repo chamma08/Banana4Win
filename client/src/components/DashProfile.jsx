@@ -161,8 +161,8 @@ export default function DashProfile() {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-yellow-200">
-      <div className="max-w-lg mx-auto p-3 w-full bg-yellow-100 rounded-lg border-4 border-red-500 shadow-lg">
-        <h1 className="my-7 text-center font-semibold text-3xl">Banana Profile</h1>
+      <div className="max-w-lg mx-auto p-5 w-full bg-yellow-100 rounded-lg border-4 border-red-800 shadow-lg">
+        <h1 className="my-7 text-center text-yellow-400 font-semibold text-3xl">Banana Profile</h1>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <input
@@ -239,7 +239,7 @@ export default function DashProfile() {
             {loading ? "Loading..." : "Update"}
           </Button>
         </form>
-        <div className="text-red-500 flex justify-between mt-5">
+        <div className="text-red-500 font-semibold flex justify-between mt-5">
           <span onClick={() => setShowModal(true)} className="cursor-pointer">
             Delete Account
           </span>

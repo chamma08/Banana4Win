@@ -56,7 +56,7 @@ export default function Header() {
         className="px-4 py-2 mr-4 text-xl font-bold text-black bg-clip-text  drop-shadow-md dark:text-white"
         style={{ fontFamily: "Poppins, sans-serif" }}
       >
-        Solve Problems and Win 
+        Solve Problems
       </span>
 
       <div className="flex gap-2 md:order-2">
