@@ -21,7 +21,6 @@ import {
 } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
-import { Link, useNavigate } from "react-router-dom";
 
 export default function DashProfile() {
   const { currentUser, error, loading } = useSelector((state) => state.user);
@@ -36,7 +35,6 @@ export default function DashProfile() {
   const [formData, setFormData] = useState({});
   const filePickerRef = useRef();
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // Use navigate hook for the back button
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -160,9 +158,20 @@ export default function DashProfile() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-yellow-200">
-      <div className="max-w-lg mx-auto p-5 w-full bg-yellow-100 rounded-lg border-4 border-red-800 shadow-lg">
-        <h1 className="my-7 text-center text-yellow-400 font-semibold text-3xl">Banana Profile</h1>
+    <div
+      className="flex items-center justify-center min-h-screen bg-slate-300 bg-cover"
+      style={{
+        backgroundImage:
+          "url('https://firebasestorage.googleapis.com/v0/b/assignmentapp-f0bb1.appspot.com/o/bg.jpg?alt=media&token=f4d360c8-16f4-4b9a-843d-4b2ae93c1519')",
+      }}
+    >
+      <div
+        className="max-w-lg mx-auto p-5 w-full rounded-2xl border-2 border-red-800 shadow-lg"
+        style={{ backgroundColor: "rgba(255, 255, 255, 0.8)" }}
+      >
+        <h1 className="my-7 text-center text-yellow-500 font-bold text-3xl">
+          Banana Profile
+        </h1>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <input
@@ -190,7 +199,7 @@ export default function DashProfile() {
                     left: 0,
                   },
                   path: {
-                    stroke: `rgba(62, 152, 199, ${
+                    stroke: `rgba(255, 162, 0, ${
                       imageFileUploadProgress / 100
                     })`,
                   },
@@ -200,7 +209,7 @@ export default function DashProfile() {
             <img
               src={imageFileUrl || currentUser.profilePicture}
               alt="user"
-              className={`rounded-full w-full h-full object-cover border-8 border-[lightgray] ${
+              className={`rounded-full w-full h-full object-cover border-8 border-[#000000] ${
                 imageFileUploadProgress &&
                 imageFileUploadProgress < 100 &&
                 "opacity-60"
@@ -240,10 +249,10 @@ export default function DashProfile() {
           </Button>
         </form>
         <div className="text-red-500 font-semibold flex justify-between mt-5">
-          <span onClick={() => setShowModal(true)} className="cursor-pointer">
+          <span onClick={() => setShowModal(true)} className="cursor-pointer hover:text-red-700">
             Delete Account
           </span>
-          <span onClick={handleSignout} className="cursor-pointer">
+          <span onClick={handleSignout} className="cursor-pointer hover:text-red-700">
             Log Out
           </span>
         </div>

@@ -23,6 +23,10 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    scores: {
+        type: Number,
+        default: 0
+    }
 }, { timestamps: true });
 
 const User = mongoose.model('User', userSchema);

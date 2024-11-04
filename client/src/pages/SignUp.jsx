@@ -69,7 +69,7 @@ export default function SignUp() {
               Create New Account
             </h1>
             <div>
-              <Label value="Your username" className="text-sm" />
+              <Label value="Your Username" className="text-sm" />
               <TextInput
                 type="text"
                 placeholder="Username"

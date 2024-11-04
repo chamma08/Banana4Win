@@ -30,7 +30,7 @@ export default function Header() {
   };
 
   return (
-    <Navbar className="border-b-2">
+    <Navbar className="border-b-2 bg-slate-300">
       <Link
         to="/"
         className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white"
@@ -84,7 +84,7 @@ export default function Header() {
         ) : (
           <Link to="/sign-in">
             <Button gradientDuoTone="pinkToOrange" outline>
-              Sign In
+              Log In
             </Button>
           </Link>
         )}

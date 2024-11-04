@@ -1,8 +1,10 @@
 import { signoutSuccess } from "@/redux/user/userSlice";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSignout = async () => {
     try {
@@ -18,6 +20,10 @@ export default function Dashboard() {
     } catch (error) {
       console.log(error.message);
     }
+  };
+
+  const handleStartGame = () => {
+    navigate("/difficulty");
   };
 
   return (
@@ -38,7 +44,7 @@ export default function Dashboard() {
             alt="User Profile"
             className="w-24 h-24 rounded-full mb-4"
           />
-          <button className="bg-yellow-300 text-black text-lg font-bold py-2 px-4 rounded mb-4 hover:bg-yellow-400 mt-4">
+          <button onClick={handleStartGame} className="bg-yellow-300 text-black text-lg font-bold py-2 px-4 rounded mb-4 hover:bg-yellow-400 mt-4">
             Start Game
           </button>
           <button className="bg-yellow-300 text-black text-lg font-bold py-2 px-4 rounded mb-4 hover:bg-yellow-400">
