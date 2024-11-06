@@ -6,6 +6,7 @@ import authRoutes from './routes/auth.route.js';
 import cookieParser from 'cookie-parser';
 import postRoutes from './routes/post.route.js';
 import adminProductRoutes from './routes/products.route.js';
+/* import bananaRoutes from './routes/banana.route.js'; */
 
 dotenv.config();
 
@@ -30,6 +31,7 @@ app.use('/api/user', UserRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/post', postRoutes);
 app.use('/api/admin/products', adminProductRoutes);
+/* app.use('/api/banana', bananaRoutes); */
 
 app.use((err, req, res, next) => {
     const statusCode = res.statusCode || 500;

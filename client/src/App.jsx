@@ -7,6 +7,7 @@ import Header from './components/Header'
 import PrivateRoute from './components/PrivateRoute'
 import DashProfile from './components/DashProfile'
 import Diff from './components/Diff'
+import Game from './pages/Game'
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/profile" element={<DashProfile />} />
           <Route path='/difficulty' element={<Diff />} />
+          <Route path='/game' element={<Game />} />
         </Route>
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />

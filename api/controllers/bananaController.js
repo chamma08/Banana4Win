@@ -1,4 +1,4 @@
-import axios from "axios";
+/* import axios from "axios";
 
 export const getBananaQuestion = async (req, res) => {
   try {
@@ -9,4 +9,4 @@ export const getBananaQuestion = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch data from Banana API" });
   }
-};
+}; */
