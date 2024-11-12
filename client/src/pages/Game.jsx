@@ -5,7 +5,10 @@ import axios from "axios";
 export default function Game() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { difficulty } = location.state || { difficulty: "Easy" };
+  const { difficulty, username } = location.state || {
+    difficulty: "Easy",
+    username: "guest",
+  };
 
   const [time, setTime] = useState(
     difficulty === "Easy" ? 60 : difficulty === "Medium" ? 40 : 20
@@ -22,6 +25,7 @@ export default function Game() {
   useEffect(() => {
     if (gameOver || time <= 0) {
       setShowTimeoutPopup(true);
+      submitScore(score);
       return;
     }
 
@@ -44,6 +48,30 @@ export default function Game() {
       console.error("Failed to fetch question:", error);
     }
   };
+
+  const submitScore = async (score) => {
+    try {
+      const res = await fetch("http://localhost:3000/api/scores/saveScore", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({ score }),
+      });
+  
+      const data = await res.json();
+  
+      if (!res.ok) {
+        console.error("Failed to submit score:", data.message);
+      } else {
+        console.log("Score submitted successfully", data);
+      }
+    } catch (error) {
+      console.error("Failed to submit score", error.message);
+    }
+  };
+  
 
   const handleRetry = () => {
     setShowTimeoutPopup(false);
@@ -90,7 +118,7 @@ export default function Game() {
             className="text-red-600 font-bold text-3xl top-0 left-0 absolute"
           >
             <svg
-              className="w-[40px] h-[40px] text-red-600"
+              className="w-[35px] h-[35px] text-red-600"
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
               viewBox="0 0 24 24"
@@ -102,9 +130,7 @@ export default function Game() {
               />
             </svg>
           </button>
-          <h1 className="text-lg font-bold bg-orange-500 ml-60 px-4 py-2 rounded-lg text-white">
-            Banana4Win
-          </h1>
+
           <div className="font-bold text-2xl px-4 py-2 rounded-lg flex items-center space-x-2">
             <img
               src="/deadline.png"
@@ -124,11 +150,20 @@ export default function Game() {
           </div>
         </div>
 
-        <div className="absolute top-7 left-24 bg-green-500 text-white font-bold text-xl px-4 py-2 rounded-lg">
+        <div className="absolute top-7 left-64 bg-green-500 text-white font-bold text-xl px-4 py-2 rounded-lg">
           Score: {score}
         </div>
-        <div className="absolute top-7 right-36 border-2 border-red-800 text-black font-bold text-xl px-4 py-2 rounded-full">
-          {lifelines}
+        <div className="absolute top-7 right-10 flex space-x-2">
+          {[...Array(3)].map((_, index) => (
+            <img
+              key={index}
+              src="/b.png" // replace with the path to your banana icon
+              alt="Lifeline"
+              className={`w-10 h-10 ${
+                index < lifelines ? "visible" : "invisible"
+              }`}
+            />
+          ))}
         </div>
 
         <div className="bg-white p-4 mb-4 rounded-lg border-2">

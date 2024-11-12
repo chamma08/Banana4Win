@@ -24,12 +24,17 @@ export default function SignIn() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
+    // Basic form validation
     if (!formData.email || !formData.password) {
       dispatch(signInFailure("Please fill all the fields!"));
       return;
     }
+  
     try {
       dispatch(signInStart());
+  
+      // Sending the POST request to the sign-in endpoint
       const res = await fetch("/api/auth/signin", {
         method: "POST",
         headers: {
@@ -37,20 +42,34 @@ export default function SignIn() {
         },
         body: JSON.stringify(formData),
       });
+  
+      // Ensure response is in JSON format
       const data = await res.json();
-      if (data.success === false) {
-        dispatch(signInFailure(data.message));
+  
+      // Handle errors from the response
+      if (!res.ok) {
+        // This will handle any non-OK status codes (e.g., 400 or 500)
+        dispatch(signInFailure(data.message || "An error occurred"));
         return;
       }
-
-      if (res.ok) {
-        dispatch(signInSuccess(data));
-        navigate("/");
+  
+      // Successful login
+      if (data.token) {
+        dispatch(signInSuccess(data));  // Dispatch the success action
+        localStorage.setItem("token", data.token);  // Store the token
+        console.log("Token saved:", data.token);
+        navigate("/");  // Redirect after successful sign-in
+      } else {
+        // In case the response doesn't include a token (shouldn't happen in theory)
+        dispatch(signInFailure("Token not found in response"));
       }
+  
     } catch (error) {
-      dispatch(signInFailure(error.message));
+      // Catch any other errors (network, etc.)
+      dispatch(signInFailure(error.message || "An unexpected error occurred"));
     }
   };
+  
 
   return (
     <div className="min-h-screen bg-yellow-300">

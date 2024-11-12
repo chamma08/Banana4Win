@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    scores: {
+    score: {
         type: Number,
         default: 0
     }

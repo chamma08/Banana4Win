@@ -26,6 +26,10 @@ export default function Dashboard() {
     navigate("/difficulty");
   };
 
+  const handleLeaderboard = () => {
+    navigate("/leaderboard");
+  };
+
   return (
     <div
       className="flex items-center justify-center min-h-screen bg-cover bg-center"
@@ -47,7 +51,7 @@ export default function Dashboard() {
           <button onClick={handleStartGame} className="bg-yellow-300 text-black text-lg font-bold py-2 px-4 rounded mb-4 hover:bg-yellow-400 mt-4">
             Start Game
           </button>
-          <button className="bg-yellow-300 text-black text-lg font-bold py-2 px-4 rounded mb-4 hover:bg-yellow-400">
+          <button onClick={handleLeaderboard} className="bg-yellow-300 text-black text-lg font-bold py-2 px-4 rounded mb-4 hover:bg-yellow-400">
             Leaderboard
           </button>
           <button

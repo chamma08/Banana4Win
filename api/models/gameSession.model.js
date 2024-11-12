@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const gameSessionSchema = new mongoose.Schema({
-    user: {
+    userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
@@ -10,10 +10,7 @@ const gameSessionSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    date: {
-        type: Date,
-        default: Date.now
-    },
+
 });
 
 const GameSession = mongoose.model('GameSession', gameSessionSchema);

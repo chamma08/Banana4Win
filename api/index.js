@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import postRoutes from "./routes/post.route.js";
 import adminProductRoutes from "./routes/products.route.js";
 import gameSessionRoutes from "./routes/gameSession.route.js";
+import cors from "cors";
 
 dotenv.config();
 
@@ -22,6 +23,11 @@ mongoose
 
 const app = express();
 
+app.use(cors({
+  origin: "http://localhost:3000", // Replace with your client URL
+  credentials: true,               // Allow credentials (cookies)
+}));
+
 app.use(express.json());
 app.use(cookieParser());
 
@@ -33,7 +39,8 @@ app.use("/api/user", UserRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/post", postRoutes);
 app.use("/api/admin/products", adminProductRoutes);
-app.use("/api/gameSession", gameSessionRoutes);
+app.use("/api/scores", gameSessionRoutes);
+
 
 app.use((err, req, res, next) => {
   const statusCode = res.statusCode || 500;
