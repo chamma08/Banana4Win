@@ -55,7 +55,7 @@ export default function Game() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
         body: JSON.stringify({ score }),
       });
@@ -157,7 +157,7 @@ export default function Game() {
           {[...Array(3)].map((_, index) => (
             <img
               key={index}
-              src="/b.png" // replace with the path to your banana icon
+              src="/b.png" 
               alt="Lifeline"
               className={`w-10 h-10 ${
                 index < lifelines ? "visible" : "invisible"
