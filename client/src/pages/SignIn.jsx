@@ -56,7 +56,7 @@ export default function SignIn() {
       // Successful login
       if (data.token) {
         dispatch(signInSuccess(data));  // Dispatch the success action
-        localStorage.setItem("token", data.token);  // Store the token
+        localStorage.setItem("access_token", data.token);  // Store the token
         console.log("Token saved:", data.token);
         navigate("/");  // Redirect after successful sign-in
       } else {

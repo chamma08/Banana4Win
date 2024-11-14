@@ -2,15 +2,30 @@ import jwt from "jsonwebtoken";
 import { errorHandler } from "./error.js";
 
 export const veriToken = (req, res, next) => {
-  const token = req.cookies.access_token;
+  let token = req.header('Authorization');
 
-  if (!token) {
-    return next(errorHandler(403, "Access denied, no token provided"));
-  }
+    // Remove 'Bearer ' if it's part of the token
+    if (token && token.startsWith('Bearer ')) {
+        token = token.slice(7, token.length).trim(); // Remove 'Bearer ' prefix
+    }
+    
+    if (!token) {
+        return res.status(401).json({
+            success: false,
+            statusCode: 401,
+            message: 'Access denied, no token provided'
+        });
+    }
 
-  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-    if (err) return next(errorHandler(403, "Invalid token"));
-    req.user = decoded;
-    next();
-  });
+    try {
+        const verified = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = verified;
+        next();
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            statusCode: 400,
+            message: 'Invalid token'
+        });
+    }
 };

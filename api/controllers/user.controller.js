@@ -70,15 +70,22 @@ export const deleteUser = async (req, res, next) => {
   }
 };
 
-export const saveScore = async (req, res, next) => {
-  const { score } = req.body;
-  const userId = req.user.id; 
-
+export const saveScore = async (req, res) => {
   try {
-    await User.create({ userId, score });
-    res.status(200).json("Score submitted successfully");
+      const { score,username,email,password } = req.body;
+      const userId = req.user.userId;
+
+      if (!score) {
+          return res.status(400).json({ success: false, message: "Score is required" });
+      }
+
+      const gameSession = new User({ userId, score,username,email,password });
+      await gameSession.save();
+      
+      res.status(200).json({ success: true, message: "Score saved successfully" });
   } catch (error) {
-    next(error);
+      console.error("Error saving score:", error);
+      res.status(500).json({ success: false, message: "Error saving score", error });
   }
 };
 
