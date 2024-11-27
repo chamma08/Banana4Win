@@ -72,14 +72,13 @@ export const deleteUser = async (req, res, next) => {
 
 export const saveScore = async (req, res) => {
   try {
-      const { score,username,email,password } = req.body;
-      const userId = req.user.userId;
+      const { score } = req.body;
 
       if (!score) {
           return res.status(400).json({ success: false, message: "Score is required" });
       }
 
-      const gameSession = new User({ userId, score,username,email,password });
+      const gameSession = new User({ score });
       await gameSession.save();
       
       res.status(200).json({ success: true, message: "Score saved successfully" });

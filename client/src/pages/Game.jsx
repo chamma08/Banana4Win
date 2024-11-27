@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 export default function Game() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { currentUser } = useSelector((state) => state.user);
   const { difficulty, username } = location.state || {
     difficulty: "Easy",
     username: "guest",
@@ -21,21 +23,25 @@ export default function Game() {
   const [showTimeoutPopup, setShowTimeoutPopup] = useState(false);
   const [lifelines, setLifelines] = useState(3);
   const [gameOver, setGameOver] = useState(false);
+  const [questionLoaded, setQuestionLoaded] = useState(false);
 
   useEffect(() => {
-    if (gameOver || time <= 0) {
-      setShowTimeoutPopup(true);
-      submitScore(score);
+    if (!questionLoaded || gameOver || time <= 0) {
+      if (time <= 0 || gameOver) {
+        setShowTimeoutPopup(true);
+        submitScore(score);
+      }
       return;
     }
 
     const timer = setInterval(() => setTime((time) => time - 1), 1000);
 
     return () => clearInterval(timer);
-  }, [time, gameOver]);
+  }, [time, gameOver, questionLoaded]);
 
   const fetchQuestion = async () => {
     try {
+      setQuestionLoaded(false);
       const response = await axios.get(
         "https://marcconrad.com/uob/banana/api.php"
       );
@@ -44,34 +50,38 @@ export default function Game() {
       setCorrect(null);
       setUserAnswer("");
       setTime(difficulty === "Easy" ? 60 : difficulty === "Medium" ? 40 : 20);
+      setQuestionLoaded(true);
     } catch (error) {
       console.error("Failed to fetch question:", error);
     }
   };
 
-  const submitScore = async (score,username) => {
+  const submitScore = async (score) => {
     try {
-      const res = await fetch("/api/scores/saveScore", {
+      const token = localStorage.getItem("access_token");
+      const response = await fetch("/api/scores/saveScore", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ score,username }),
+        body: JSON.stringify({
+          score,
+          username: currentUser?.username || "guest",
+        }),
       });
-  
-      const data = await res.json();
-  
-      if (!res.ok) {
+
+      const data = await response.json();
+
+      if (!response.ok) {
         console.error("Failed to submit score:", data.message);
       } else {
         console.log("Score submitted successfully", data);
       }
     } catch (error) {
-      console.error("Failed to submit score", error.message);
+      console.error("Failed to submit score:", error.message);
     }
   };
-  
 
   const handleRetry = () => {
     setShowTimeoutPopup(false);
@@ -105,13 +115,13 @@ export default function Game() {
 
   return (
     <div
-      className="flex justify-center items-center h-screen bg-yellow-200"
+      className="flex justify-center items-center h-screen bg-cover bg-center"
       style={{
         backgroundImage:
-          "url('https://firebasestorage.googleapis.com/v0/b/quickbuy-assign.appspot.com/o/funny-monkey-playing-basketball.jpg?alt=media&token=2cd4fbcd-36a7-4cae-b244-95f7c9d4911c')",
+          "url('https://firebasestorage.googleapis.com/v0/b/quickbuy-assign.appspot.com/o/mn2.jpg?alt=media&token=e971155c-0329-4dc1-9601-854608b15f98')",
       }}
     >
-      <div className="relative p-6 rounded-lg shadow-lg border-2 border-red-700 w-[40rem] h-[37rem] bg-yellow-100">
+      <div className="relative p-6 rounded-lg shadow-lg border-2 border-red-700 w-[40rem] h-[37rem] bg-black bg-opacity-60">
         <div className="flex justify-between items-center mb-4">
           <button
             onClick={handleClose}
@@ -139,7 +149,7 @@ export default function Game() {
             />
             <span
               className={`text-3xl ${
-                time <= 10 ? "text-red-600 animate-blink" : "text-black"
+                time <= 10 ? "text-red-600 animate-blink" : "text-white"
               }`}
               style={{
                 animation: time <= 10 ? "blink 1s step-end infinite" : "none",
@@ -157,7 +167,7 @@ export default function Game() {
           {[...Array(3)].map((_, index) => (
             <img
               key={index}
-              src="/b.png" 
+              src="/b.png"
               alt="Lifeline"
               className={`w-10 h-10 ${
                 index < lifelines ? "visible" : "invisible"

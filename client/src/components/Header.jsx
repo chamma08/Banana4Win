@@ -38,7 +38,10 @@ export default function Header() {
         <span className="px-2 py-1 bg-gradient-to-r from-yellow-200 via-yellow-300 to-yellow-500 rounded-lg text-white">
           Banana
         </span>
-        4Win
+        <span className="font-bold">
+          4Win
+        </span>
+        
       </Link>
       {/* <form>
         <TextInput

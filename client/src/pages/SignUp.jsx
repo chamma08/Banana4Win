@@ -47,54 +47,59 @@ export default function SignUp() {
   };
 
   return (
-    <div className="min-h-screen bg-yellow-300">
-      <div className="flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-5">
-        <div className="flex-1 mr-10 mt-20">
-          <Link to="/" className="font-bold dark:text-white text-4xl">
+    <div
+      className="min-h-screen bg-cover bg-center relative"
+      style={{
+        backgroundImage: `url('b4.jpg')`,
+      }}
+    >
+      {/* Blur Overlay */}
+      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+
+      <div className="relative flex p-5 max-w-4xl mx-auto flex-col md:flex-row md:items-center gap-8 text-white">
+        <div className="flex-1 mr-10 mt-10">
+          <Link to="/" className="font-bold text-4xl">
             <img
               src="./b1.png"
-              alt="Navoda"
-              className="mr-10 py-1 rounded-lg items-center justify-center"
-              style={{ width: "450px", height: "450px", objectFit: "cover" }}
+              alt=""
+              className="py-1 rounded-lg items-center justify-center shadow-lg"
+              /* style={{ width: "450px", height: "450px", objectFit: "cover" }} */
             />
           </Link>
-          <p className="text-lg mt-5 text-center font-semibold">
-            
-          </p>
         </div>
 
-        <div className="flex-1">
+        <div className="flex-1 bg-black/60 p-6 rounded-lg shadow-md">
           <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-            <h1 className="text-3xl text-center font-bold mb-6 text-red-800">
+            <h1 className="text-3xl text-center font-bold mb-6">
               Create New Account
             </h1>
             <div>
-              <Label value="Your Username" className="text-sm" />
+              <Label value="Your Username" className="text-sm text-white" />
               <TextInput
                 type="text"
                 placeholder="Username"
                 id="username"
-                className="w-full"
+                className="w-full mt-2"
                 onChange={handleChange}
               />
             </div>
             <div>
-              <Label value="Your Email" className="text-sm" />
+              <Label value="Your Email" className="text-sm text-white" />
               <TextInput
                 type="email"
                 placeholder="example@gmail.com"
                 id="email"
-                className="w-full"
+                className="w-full mt"
                 onChange={handleChange}
               />
             </div>
             <div>
-              <Label value="Your Password" className="text-sm" />
+              <Label value="Your Password" className="text-sm text-white" />
               <TextInput
                 type="password"
                 placeholder="Password"
                 id="password"
-                className="w-full"
+                className="w-full mt-2"
                 onChange={handleChange}
               />
             </div>
@@ -116,7 +121,7 @@ export default function SignUp() {
           </form>
           <div className="flex gap-2 text-sm mt-5">
             <span>Already have an account?</span>
-            <Link to="/sign-in" className="text-red-800 font-semibold">
+            <Link to="/sign-in" className="text-teal-300 font-semibold">
               Sign In
             </Link>
           </div>

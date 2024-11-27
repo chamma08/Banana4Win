@@ -5,7 +5,6 @@ import UserRoutes from "./routes/user.route.js";
 import authRoutes from "./routes/auth.route.js";
 import cookieParser from "cookie-parser";
 import postRoutes from "./routes/post.route.js";
-import adminProductRoutes from "./routes/products.route.js";
 import gameSessionRoutes from "./routes/gameSession.route.js";
 import cors from "cors";
 
@@ -38,7 +37,6 @@ app.listen(3000, () => {
 app.use("/api/user", UserRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/post", postRoutes);
-app.use("/api/admin/products", adminProductRoutes);
 app.use("/api/scores", gameSessionRoutes);
 
 
