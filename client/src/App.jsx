@@ -9,6 +9,7 @@ import DashProfile from "./components/DashProfile";
 import Diff from "./components/Diff";
 import Game from "./pages/Game";
 import Leaderboard from "./pages/Leaderboard";
+import TikTacToe from "./pages/TikTacToe";
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
           <Route path="/profile" element={<DashProfile />} />
           <Route path="/difficulty" element={<Diff />} />
           <Route path="/game" element={<Game />} />
+          <Route path="/special-mode" element={<TikTacToe/>} />
         </Route>
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />

@@ -159,16 +159,13 @@ export default function DashProfile() {
 
   return (
     <div
-      className="flex items-center justify-center min-h-screen bg-black bg-opacity-80 bg-cover"
+      className="flex items-center justify-center min-h-screen bg-black bg-opacity-80 bg-cover "
       style={{
         backgroundImage:
           "url('https://firebasestorage.googleapis.com/v0/b/assignmentapp-f0bb1.appspot.com/o/bg.jpg?alt=media&token=f4d360c8-16f4-4b9a-843d-4b2ae93c1519')",
       }}
     >
-      <div
-        className="max-w-lg mx-auto p-5 w-full rounded-2xl border-2 border-red-800 shadow-lg bg-black bg-opacity-80"
-        
-      >
+      <div className="max-w-lg mx-auto mb-4 p-5 w-full rounded-2xl border-2 border-yellow-300 shadow-lg bg-black bg-opacity-80 ">
         <h1 className="my-7 text-center text-yellow-300 font-bold text-3xl">
           Banana Profile
         </h1>
@@ -209,7 +206,7 @@ export default function DashProfile() {
             <img
               src={imageFileUrl || currentUser.profilePicture}
               alt="user"
-              className={`rounded-full w-full h-full object-cover border-8 border-[#000000] ${
+              className={`rounded-full w-full h-full object-cover border-8 border-[#e1fad7] ${
                 imageFileUploadProgress &&
                 imageFileUploadProgress < 100 &&
                 "opacity-60"
@@ -249,10 +246,16 @@ export default function DashProfile() {
           </Button>
         </form>
         <div className="text-red-500 font-semibold flex justify-between mt-5">
-          <span onClick={() => setShowModal(true)} className="cursor-pointer hover:text-red-700">
+          <span
+            onClick={() => setShowModal(true)}
+            className="cursor-pointer hover:text-red-700"
+          >
             Delete Account
           </span>
-          <span onClick={handleSignout} className="cursor-pointer hover:text-red-700">
+          <span
+            onClick={handleSignout}
+            className="cursor-pointer hover:text-red-700"
+          >
             Log Out
           </span>
         </div>
