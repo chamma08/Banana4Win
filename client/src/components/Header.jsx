@@ -11,7 +11,6 @@ export default function Header() {
   const path = useLocation().pathname;
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.user);
-  const { theme } = useSelector((state) => state.theme);
 
   const handleSignout = async () => {
     try {
@@ -38,23 +37,8 @@ export default function Header() {
         <span className="px-2 py-1 bg-gradient-to-r from-yellow-200 via-yellow-300 to-yellow-500 rounded-lg text-white">
           Banana
         </span>
-        <span className="font-bold">
-          4Win
-        </span>
-        
+        <span className="font-bold">4Win</span>
       </Link>
-      {/* <form>
-        <TextInput
-          type="text"
-          placeholder="Search.."
-          rightIcon={AiOutlineSearch}
-          className="hidden lg-inline"
-        />
-      </form>
-      <Button className="w-12 h-10 lg:hidden" color="gray" pill>
-        <AiOutlineSearch />
-      </Button>
- */}
       <span
         className="px-4 py-2 mr-4 text-xl font-bold text-black bg-clip-text  drop-shadow-md dark:text-white"
         style={{ fontFamily: "Poppins, sans-serif" }}
@@ -63,7 +47,6 @@ export default function Header() {
       </span>
 
       <div className="flex gap-2 md:order-2">
-        
         {currentUser ? (
           <Dropdown
             arrowIcon={false}
