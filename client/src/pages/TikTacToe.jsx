@@ -19,9 +19,9 @@ export default function TikTacToe() {
   };
 
   const playerImage =
-    "https://firebasestorage.googleapis.com/v0/b/quickbuy-assign.appspot.com/o/p1.png?alt=media&token=ede4743e-c2ee-41c9-81a3-9e7003ddcfc8"; // Replace with actual URL
+    "https://firebasestorage.googleapis.com/v0/b/quickbuy-assign.appspot.com/o/p1.png?alt=media&token=ede4743e-c2ee-41c9-81a3-9e7003ddcfc8";
   const computerImage =
-    "https://firebasestorage.googleapis.com/v0/b/quickbuy-assign.appspot.com/o/p2.png?alt=media&token=bab42c7f-2724-425e-b8ff-e9fbe71fff4e"; // Replace with actual URL
+    "https://firebasestorage.googleapis.com/v0/b/quickbuy-assign.appspot.com/o/p2.png?alt=media&token=bab42c7f-2724-425e-b8ff-e9fbe71fff4e";
 
   const checkWinner = (currentBoard) => {
     const winningCombinations = [
@@ -81,17 +81,9 @@ export default function TikTacToe() {
     setWinner(null);
   };
 
-  /* const handleGameEnd = () => {
-    if (winner === "Player") {
-      setScore((prevScore) => prevScore + 50);
-      alert("Congratulations! You won 50 points.");
-    } else if (winner === "Computer") {
-      alert("Sorry! You lost. Try again tomorrow.");
-    } else if (winner === "Draw") {
-      alert("It's a Draw!");
-    }
+  const mainMenu = () => {
     navigate("/");
-  }; */
+  };
 
   useEffect(() => {
     const result = checkWinner(board);
@@ -131,13 +123,7 @@ export default function TikTacToe() {
             <span className="text-yellow-300">SPECIAL </span>TIK TAC TOE{" "}
             <span className="text-yellow-300">MODE</span>
           </h1>
-          {/* {winner && (
-            <div className="text-2xl font-semibold">
-              {winner === "Draw"
-                ? "It's a Draw!"
-                : `${winner === "Player" ? "WINNER" : "LOSE"} `}
-            </div>
-          )} */}
+
           <div className="grid grid-cols-3 gap-4">
             {board.map((cell, index) => (
               <div
@@ -145,26 +131,26 @@ export default function TikTacToe() {
                 onClick={() => handlePlayerMove(index)}
                 className={`w-20 h-20 border-2 border-black rounded-3xl flex justify-center items-center cursor-pointer ${
                   cell || winner || !isPlayerTurn ? "cursor-not-allowed" : ""
-                } bg-white`}
+                } bg-green-200`}
               >
                 {cell === "Player" && (
-                  <img src={playerImage} alt="Player" className="w-16 h-16" />
+                  <img src={playerImage} alt="Player" className="w-26 h-26" />
                 )}
                 {cell === "Computer" && (
                   <img
                     src={computerImage}
                     alt="Computer"
-                    className="w-16 h-16"
+                    className="w-26 h-26"
                   />
                 )}
               </div>
             ))}
           </div>
           <button
-            onClick={resetGame}
-            className="px-4 py-2 bg-blue-500 text-white rounded-lg"
+            onClick={mainMenu}
+            className="px-4 py-2 bg-red-500 text-white rounded-lg w-44 "
           >
-            Reset Game
+            Main Menu
           </button>
         </div>
         {winner && showMessPopup && (
@@ -178,17 +164,11 @@ export default function TikTacToe() {
                   ? "It's a Draw!"
                   : `${
                       winner === "Player"
-                        ? "Congratulations! You won 50 points Come back tomorrow for more fun."
-                        : "Sorry! You lost. Try again tomorrow."
+                        ? "Congratulations! You won 50 points Come back tomorrow for more"
+                        : "Try again tomorrow."
                     }`}
               </p>
               <div className="flex justify-center mt-4">
-                {/* <button
-                  onClick={handleRetry}
-                  className="px-4 py-2 bg-blue-500 text-white rounded-lg"
-                >
-                  Retry
-                </button> */}
                 <button
                   onClick={handleClose}
                   className="px-4 py-2 bg-red-500 text-white rounded-lg ml-4"

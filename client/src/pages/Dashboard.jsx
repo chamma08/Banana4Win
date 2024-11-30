@@ -80,6 +80,10 @@ export default function Dashboard() {
     navigate("/leaderboard");
   };
 
+  const profile = () => {
+    navigate("/profile");
+  };
+
   return (
     <div
       className="flex items-center justify-center min-h-screen bg-cover bg-center"
@@ -130,10 +134,10 @@ export default function Dashboard() {
           </li>
           <li>
             <button
-              /* onClick={handleOptions} */
+              onClick={profile}
               className="w-full py-2 bg-yellow-400 hover:bg-yellow-500 text-lg font-bold rounded"
             >
-              Credits
+              Profile
             </button>
           </li>
           <li>

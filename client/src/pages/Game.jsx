@@ -198,7 +198,7 @@ export default function Game() {
           />
           <button
             onClick={submitAnswer}
-            className="bg-yellow-400 px-4 py-2 rounded-lg font-bold"
+            className="bg-yellow-400 hover:bg-yellow-200 px-4 py-2 rounded-lg font-bold"
           >
             Enter
           </button>
