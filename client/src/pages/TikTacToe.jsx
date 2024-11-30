@@ -9,11 +9,6 @@ export default function TikTacToe() {
   const navigate = useNavigate();
   const [showMessPopup, setShowMessPopup] = useState(false);
 
-  const handleRetry = () => {
-    resetGame();
-    setShowMessPopup(false);
-  };
-
   const handleClose = () => {
     navigate("/");
   };
@@ -73,12 +68,6 @@ export default function TikTacToe() {
       currentBoard[randomIndex] = "Computer";
       setBoard([...currentBoard]);
     }
-  };
-
-  const resetGame = () => {
-    setBoard(Array(9).fill(null));
-    setIsPlayerTurn(true);
-    setWinner(null);
   };
 
   const mainMenu = () => {

@@ -40,7 +40,7 @@ export default function Dashboard() {
           }
         }, 1000);
 
-        return () => clearInterval(interval); // Cleanup interval on unmount
+        return () => clearInterval(interval); 
       } else {
         setIsSpecialModeAvailable(true);
       }
@@ -52,7 +52,7 @@ export default function Dashboard() {
   const handleSpecialMode = () => {
     localStorage.setItem("specialModeLastActivated", new Date().toISOString());
     setIsSpecialModeAvailable(false);
-    setCountdown("23h 59m 59s"); // Start the countdown immediately
+    setCountdown("23h 59m 59s"); 
     navigate("/special-mode");
   };
 
