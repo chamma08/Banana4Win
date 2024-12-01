@@ -31,14 +31,12 @@ export const saveScore = async (req, res) => {
       });
     }
 
-    // Check if the user already has a score
     const existingSession = await GameSession.findOne({
       $or: [{ userId }, { username: finalUsername }],
     });
 
     if (existingSession) {
       if (score > existingSession.score) {
-        // Update with the new higher score
         existingSession.score = score;
         await existingSession.save();
         return res.status(200).json({
@@ -52,8 +50,6 @@ export const saveScore = async (req, res) => {
         });
       }
     }
-
-    // Save new score if no previous record exists
     const gameSession = new GameSession({
       userId,
       username: finalUsername,
